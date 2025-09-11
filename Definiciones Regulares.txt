@@ -10,14 +10,11 @@
 <punto> ::= "."
 <definicionFlotante> ::= <definicionEntero> <punto> <definicionNatural> | <cero> <punto> <cero> | <simboloMenos>? <cero> <punto> <cero>* <definicionNatural>+ | <definicionEntero> <punto> <cero>* <definicionNatural>
 
-
 <letra> ::= [a-z] | [A-Z]
 <oracion> ::= <letra>+
 <simboloGuionBajo> ::= "_"
 <identificador> ::= <simboloGuionBajo>? (<oracion> | <digitoCero> | <simboloGuionBajo>)*
 <espacio> ::= " "
-
-
 <comilla> ::= "\""
 <cadena> ::= <comilla> (<oracion> | <digitoCero> | <simboloGuionBajo> | <punto> | <simboloMenos> | <espacio>)* <comilla>
 <palabraReservadaTrue> ::= "True"
@@ -30,6 +27,25 @@
 <palabraReservadaLet> ::= "let"
 <simboloIgual> ::= "="
 <finalExpresion> ::= "$"
+<palabraReservadaChar> ::= "char"
+<nonPrintable> ::= "<NUL>" | "<SOH>" | "<STX>" | "<ETX>" | "<EOT>" 
+                 | "<ENQ>" | "<ACK>" | "<BEL>" | "<BS>"  | "<TAB>" 
+                 | "<LF>"  | "<VT>"  | "<FF>"  | "<CR>"  | "<SO>" 
+                 | "<SI>"  | "<DLE>" | "<DC1>" | "<DC2>" | "<DC3>" 
+                 | "<DC4>" | "<NAK>" | "<SYN>" | "<ETB>" | "<CAN>" 
+                 | "<EM>"  | "<SUB>" | "<ESC>" | "<FS>"  | "<GS>" 
+                 | "<RS>"  | "<US>"  | "<DEL>"
+
+<expresionesASCII> ::= <nonPrintable>
+                     | " " | "!" | "\"" | "#" | "$" | "%" | "&" | "(" | ")" 
+                     | "*" | "+" | "," | "-" | "." | "/" 
+                     | ":" | ";" | "<" | "=" | ">" | "?" 
+                     | "@" 
+                     | "[" | "\\" | "]" | "^" | "_" | "`" 
+                     | "{" | "|" | "}" | "~"
+ 
+<comillaSimple> ::= "'"
 <declaracionEntero> ::= <palabraReservadaLet> <espacio> <palabraReservadaTipoEntero> <espacio> <identificador> (<espacio>? <simboloIgual> <espacio>? <definicionEntero>)? <finalExpresion>
 <declaracionFlotante> ::= <palabraReservadaLet> <espacio> <palabraReservadaTipoFlotante> <espacio> <identificador> (<espacio>? <simboloIgual> <espacio>? <definicionFlotante>)? <finalExpresion>
 <declaracionBooleano> ::= <palabraReservadaLet> <espacio> <palabraReservadaTipoBooleano> <espacio> <identificador> (<espacio>? <simboloIgual> <espacio>? (<palabraReservadaTrue> | <palabraReservadaFalse>))? <finalExpresion>
+<declaracionCaracter> ::= <palabraReservadaLet> <espacio> <palabraReservadaChar> <espacio> <identificador> (<espacio>? <simboloIgual> <espacio>? <comillaSimple> (<letra> | <expresionesASCII> | <digitoCero>) <comillaSimple>)? <finalExpresion>
