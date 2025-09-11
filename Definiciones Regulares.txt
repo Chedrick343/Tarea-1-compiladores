@@ -1,0 +1,29 @@
+<gpa> ::= "4.0" | <leading> "." <trailing>
+<leading> ::= [0-3]
+<trailing> ::= [0-9]
+<digitoCero> ::= [0-9]
+<digito> ::= [1-9]
+<simboloMenos> ::= "-"
+<cero> ::= "0" 
+<definicionEntero> ::= <cero> | <simboloMenos>? <digito> <digitoCero>*
+<definicionNatural> ::= <simboloMenos>? <digito> <digitoCero>*
+<punto> ::= "."
+<definicionFlotante> ::= <definicionEntero> <punto> <definicionNatural> | <cero> <punto> <cero> | <simboloMenos>? <cero> <punto> <cero>* <definicionNatural>+ | <definicionEntero> <punto> <cero>* <definicionNatural>
+
+<letra> ::= [a-z] | [A-Z]
+<oracion> ::= <letra>+
+<simboloGuionBajo> ::= "_"
+<identificador> ::= <simboloGuionBajo>? (<oracion> | <digitoCero> | <simboloGuionBajo>)*
+<espacio> ::= " "
+<comilla> ::= "\""
+<cadena> ::= <comilla> (<oracion> | <digitoCero> | <simboloGuionBajo> | <punto> | <simboloMenos> | <espacio>)* <comilla>
+<palabraReservadaTrue> ::= "True"
+<palabraReservadaFalse> ::= "False"
+<palabraReservadaTipoEntero> ::= "int"
+<palabraReservadaTipoString> ::= "String"
+<palabraReservadaTipoFlotante> ::= "float"
+<palabraReservadaLet> ::= "let"
+<simboloIgual> ::= "="
+<finalExpresion> ::= "$"
+<declaracionEntero> ::= <palabraReservadaLet> <espacio> <palabraReservadaTipoEntero> <espacio> <identificador> (<espacio>? <simboloIgual> <espacio>? <definicionEntero>)? <finalExpresion>
+
