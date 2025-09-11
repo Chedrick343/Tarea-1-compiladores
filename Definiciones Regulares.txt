@@ -10,20 +10,26 @@
 <punto> ::= "."
 <definicionFlotante> ::= <definicionEntero> <punto> <definicionNatural> | <cero> <punto> <cero> | <simboloMenos>? <cero> <punto> <cero>* <definicionNatural>+ | <definicionEntero> <punto> <cero>* <definicionNatural>
 
+
 <letra> ::= [a-z] | [A-Z]
 <oracion> ::= <letra>+
 <simboloGuionBajo> ::= "_"
 <identificador> ::= <simboloGuionBajo>? (<oracion> | <digitoCero> | <simboloGuionBajo>)*
 <espacio> ::= " "
+
+
 <comilla> ::= "\""
 <cadena> ::= <comilla> (<oracion> | <digitoCero> | <simboloGuionBajo> | <punto> | <simboloMenos> | <espacio>)* <comilla>
 <palabraReservadaTrue> ::= "True"
 <palabraReservadaFalse> ::= "False"
+
 <palabraReservadaTipoEntero> ::= "int"
 <palabraReservadaTipoString> ::= "String"
 <palabraReservadaTipoFlotante> ::= "float"
+<palabraReservadaTipoBooleano> ::= "boolean"
 <palabraReservadaLet> ::= "let"
 <simboloIgual> ::= "="
 <finalExpresion> ::= "$"
 <declaracionEntero> ::= <palabraReservadaLet> <espacio> <palabraReservadaTipoEntero> <espacio> <identificador> (<espacio>? <simboloIgual> <espacio>? <definicionEntero>)? <finalExpresion>
-
+<declaracionFlotante> ::= <palabraReservadaLet> <espacio> <palabraReservadaTipoFlotante> <espacio> <identificador> (<espacio>? <simboloIgual> <espacio>? <definicionFlotante>)? <finalExpresion>
+<declaracionBooleano> ::= <palabraReservadaLet> <espacio> <palabraReservadaTipoBooleano> <espacio> <identificador> (<espacio>? <simboloIgual> <espacio>? (<palabraReservadaTrue> | <palabraReservadaFalse>))? <finalExpresion>
