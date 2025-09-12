@@ -98,7 +98,9 @@
 <sentencia> ::= (<creacion> 
                 | <asignacion> 
                 | <obtenerAsignarElementoArreglo> 
-                | <condicional> 
+                | <condicional>
+                | <sumaUnaria>
+                | <restaUnaria>
                 | "break" 
                 | <retorno>
                 | <comentario>
@@ -117,6 +119,7 @@
               | <palabraReservadaFalse>
               | <definicionChar>
               | <cadena>
+              | <sumaUnaria>
               | <identificador>
               | <palabraReservadaLet> <espacios> <tipo> <abreCorchete> <definicionNatural> <cierraCorchete> <espacios> <identificador> <finalExpresion>
 
@@ -155,6 +158,10 @@
 <bloqueFor> ::= "for" <espacio>? <abrirParentesis>? <espacios>? <asignacion> <espacios>? <cerrarParentesis>? <espacio>?
                 "step" <espacio>? <definicionNatural> <espacio>? ( "to" | "downto" ) <espacio>?
                 <expresion> <espacio>? "do" (<espacio> <cambios>)* <bloque>
+
+<simboloSuma> ::= "+"
+<sumaUnaria> ::= <identificador> <simboloSuma> <simboloSuma>
+<restaUnaria> ::= <identificador> <simboloMenos> <simboloMenos>
 
 <funcion> ::= (<tipo> | "void") <espacios> <identificador> <espacios>?
               <abrirParentesis> <espacios>? <listaParametros> <espacios>? <cerrarParentesis> <espacios>? <cambioLinea>?
