@@ -97,10 +97,15 @@
                 | <asignacion> 
                 | <obtenerAsignarElementoArreglo> 
                 | <condicional> 
+                | <sumaUnaria>
+                | <restaUnaria>
                 | <bucle>
                 | <bloqueFor>
                 | "break" 
                 | <retorno>
+                | <leerEntrada>
+                | <imprimirElementos>
+                | <comentario>
                 ) <finalExpresion>
 
 <expresion> ::= <termino> ( <espacios>? ("+" | "-") <espacios>? <termino> )*
@@ -117,8 +122,9 @@
               | <definicionChar>
               | <identificadorFuncion>
               | <cadena>
+              | <sumaUnaria>
               | <identificador>
-              | <palabraReservadaLet> <espacios> <tipo> <abreCorchete> <definicionNatural> <cierraCorchete> <espacios> <identificador> <finalExpresion>
+              | <obtenerAsignarElementoArreglo>
 
 <declaracion> ::= <tipo> <espacios> <identificador>
 
@@ -155,6 +161,15 @@
 <bloqueFor> ::= "for" <espacios>? <abrirParentesis>? <espacios>? <asignacion> <espacios>? <cerrarParentesis>? <espacios>?
                 "step" <espacios>? <definicionNatural> <espacios>? ( "to" | "downto" ) <espacios>?
                 <expresion> <espacios>? "do" <espacios>? <cambios>? <bloque>
+
+<simboloSuma> ::= "+"
+<sumaUnaria> ::= <identificador> <simboloSuma> <simboloSuma>
+<restaUnaria> ::= <identificador> <simboloMenos> <simboloMenos>
+<palabraReservadaInput> ::= "input"
+<palabraReservadaOutput> ::= "output"
+
+<leerEntrada> ::= <palabraReservadaInput> <espacios> <identificador>
+<imprimirElementos> ::= <palabraReservadaOutput> <abreParentesis> (<cadena> | <definicionEntero> | <definicionFlotante> | <palabraReservadaTrue> | <palabraReservadaFalse> | <identificador> | <definicionChar>) 
 
 <identificadorFuncion> ::= <identificador> <espacios>? <abrirParentesis> <espacios>? <listaParametros> <espacios>? <cerrarParentesis>
 
