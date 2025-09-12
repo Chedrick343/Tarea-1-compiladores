@@ -104,22 +104,20 @@
                 | <comentario>
                 ) <finalExpresion>
 
-<operacion> ::= <termino> ( <espacios>? ("+" | "-") <espacios>? <termino> )*
+<expresion> ::= <termino> ( <espacios>? ("+" | "-") <espacios>? <termino> )*
 
 <termino>   ::= <factor> ( <espacios>? ("*" | "/" | "//") <espacios>? <factor> )*
 
-<factor>    ::= <expresion>
-              | <abrirParentesis> <operacion> <cerrarParentesis>
+<factor>    ::= <operacion>
+              | <abrirParentesis> <expresion> <cerrarParentesis>
 
-<expresion> ::= <definicionEntero>
+<operacion> ::= <definicionEntero>
               | <definicionFlotante>
               | <palabraReservadaTrue>
               | <palabraReservadaFalse>
               | <definicionChar>
               | <cadena>
               | <identificador>
-              | <operacion>
-              | <expresionRelacional>
               | <palabraReservadaLet> <espacios> <tipo> <abreCorchete> <definicionNatural> <cierraCorchete> <espacios> <identificador> <finalExpresion>
 
 <declaracion> ::= <tipo> <espacios> <identificador>
