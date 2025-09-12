@@ -86,7 +86,9 @@
 
 <sentencias> ::= <sentencia> | <sentencia> <cambios>? <espacios>? <sentencias>
 
-<operacion> ::= <expresion> ("+" | "-" | "*" | "/") <expresion>
+<sentencia> ::= (<creacion> | <asignacion> | <obtenerAsignarElementoArreglo>) <finalExpresion>
+
+<operacion> ::= <expresion> <espacios>? ("+" | "-" | "*" | "/") <espacios>? <expresion>
 
 <expresion> ::= <definicionEntero>
               | <definicionFlotante>
@@ -105,7 +107,7 @@
 
 <asignacion> ::= <identificador> <espacios>? <simboloIgual> <espacios>? <expresion>
 
-<sentencia> ::= (<creacion> | <asignacion>) <finalExpresion>
+
 
 <bloque> ::= <abrirBloque> <cambios>? <espacios>? <cambios>? <listaSentencias> <cambios>? <espacios>? <cambios>? <cerrarBloque>
 
