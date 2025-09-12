@@ -57,3 +57,4 @@
 <abreCorchete> ::= "["
 <cierraCorchete> ::= "]"
 <declaracionArregloEntero> ::= <palabraReservadaLet> <espacio> <palabraReservadaTipoEntero> <abreCorchete> <definicionNatural> <cierraCorchete> <espacio> <identificador> <finalExpresion>
+<declaracionArregloChar> ::= <palabraReservadaLet> <espacio> <palabraReservadaTipoChar> <abreCorchete> <definicionNatural> <cierraCorchete> <espacio> <identificador> <finalExpresion>
