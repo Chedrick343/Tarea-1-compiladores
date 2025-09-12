@@ -31,6 +31,7 @@
 <palabraReservadaTipoBooleano> ::= "boolean"
 <palabraReservadaLet> ::= "let"
 <simboloIgual> ::= "="
+<definicionChar> ::= <comillaSimple> (<letra> | <expresionesASCII> | <digitoCero>) <comillaSimple>
 <finalExpresion> ::= "$"
 <palabraReservadaTipoChar> ::= "char"
 <nonPrintable> ::= "<NUL>" | "<SOH>" | "<STX>" | "<ETX>" | "<EOT>" 
@@ -61,7 +62,8 @@
 <cierraCorchete> ::= "]"
 <declaracionArregloEntero> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoEntero> <abreCorchete> <definicionNatural> <cierraCorchete> <espacios> <identificador> <finalExpresion>
 <declaracionArregloChar> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoChar> <abreCorchete> <definicionNatural> <cierraCorchete> <espacios> <identificador> <finalExpresion>
-
+<asignacionArreglo> ::= <espacios>? <simboloIgual> <espacios>? (<definicionChar> | <definicionEntero> | <identificador>)
+<obtenerAsignarElementoArreglo> ::= <identificador> <abreCorchete> <definicionNatural> <cierraCorchete> (<asignacionArreglo>)? <espacios>?
 
 
 <tipo> ::= <palabraReservadaTipoBooleano>   | <palabraReservadaTipoChar> 
