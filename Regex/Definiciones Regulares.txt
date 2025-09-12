@@ -154,6 +154,10 @@
 
 <bloque> ::= <abrirBloque> <cambios>? <espacios>? <cambios>? <listaSentencias> <cambios>? <espacios>? <cambios>? <cerrarBloque>
 
+<bloqueFor> ::= "for" <espacio>? <abrirParentesis>? <espacios>? <asignacion> <espacios>? <cerrarParentesis>? <espacio>?
+                "step" <espacio>? <definicionNatural> <espacio>? ( "to" | "downto" ) <espacio>?
+                <expresion> <espacio>? "do" (<espacio> <cambios>)* <bloque>
+
 <funcion> ::= (<tipo> | "void") <espacios> <identificador> <espacios>?
               <abrirParentesis> <espacios>? <listaParametros> <espacios>? <cerrarParentesis> <espacios>? <cambioLinea>?
               <bloque>
