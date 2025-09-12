@@ -169,15 +169,15 @@
 <palabraReservadaOutput> ::= "output"
 
 <leerEntrada> ::= <palabraReservadaInput> <espacios> <identificador>
-<imprimirElementos> ::= <palabraReservadaOutput> <abreParentesis> (<cadena> | <definicionEntero> | <definicionFlotante> | <palabraReservadaTrue> | <palabraReservadaFalse> | <identificador> | <definicionChar>) 
+<imprimirElementos> ::= <palabraReservadaOutput> <abrirParentesis> (<cadena> | <definicionEntero> | <definicionFlotante> | <palabraReservadaTrue> | <palabraReservadaFalse> | <identificador> | <definicionChar>) 
 
 <identificadorFuncion> ::= <identificador> <espacios>? <abrirParentesis> <espacios>? <listaParametros> <espacios>? <cerrarParentesis>
 
 <funcion> ::= (<tipo> | "void") <espacios> <identificadorFuncion> <espacios>? <cambioLinea>?
               <bloque>
 
-<listaFunciones> ::= <funcion> | <funcion> <espacios>? <cambios>? <listaFunciones> | E
+<listaFunciones> ::= <funcion> <finalExpresion> | <funcion> <finalExpresion> <espacios>? <cambios>? <listaFunciones> | E
 
-<main> ::= "void" <espacios>? "main" <abrirParentesis> <cerrarParentesis> <espacios>? <finalExpresion>? <cambios>? <bloque>
+<main> ::= "void" <espacios> "main" <espacios>? <cambios>? <bloque> <finalExpresion>
 
-<program> ::= <listaFunciones> <main> <listaFunciones> 
+<program> ::= ((( <funcion> <finalExpresion> ) | <sentencia>) <cambios>?)* <main> (<cambios>? (( <funcion> <finalExpresion> ) | <sentencia>))* 
