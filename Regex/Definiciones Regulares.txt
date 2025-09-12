@@ -69,7 +69,7 @@
 <abrirParentesis> ::= "("
 <cerrarParentesis> ::= ")"
 
-<parametros> ::= <parametro> | <parametro> <parametros> 
+<parametros> ::= <parametro> | (<parametro> <espacios>? "," <espacios>? <parametros>)
 
 <parametro> ::= <tipo> <identificador>
 
@@ -101,8 +101,8 @@
 
 <sentencia> ::= <creacion> | <asignacion>
 
-<bloque> ::= <abrirBloque> <sentencias> <cerrarBloque>
+<bloque> ::= <abrirBloque> <listaSentencias> <cerrarBloque>
 
 <funcion> ::= (<tipo> | "void") <espacios> <identificador> 
-              <abrirParentesis> <listaParametros> <cerrarParentesis> 
+              <abrirParentesis> <espacios>? <listaParametros> <espacios>? <cerrarParentesis> 
               <bloque>
