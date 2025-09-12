@@ -16,8 +16,6 @@
 
 <comentarioMultiLinea> ::= "adm" (<letra> | <digitoCero> | <expresionesASCII> | <espacios> | <cambioLinea>)* "!"
 
-
-
 <letra> ::= [a-z] | [A-Z]
 <oracion> ::= <letra>+
 <simboloGuionBajo> ::= "_"
@@ -93,15 +91,16 @@
 
 <listaSentencias> ::= <sentencias> | E
 
-<sentencias> ::= <sentencia> | <sentencia> <espacios>? <cambios>? <espacios>? <sentencias>
+<sentencias> ::= (<sentencia> | <comentario>) | (<sentencia> | <comentario>) <espacios>? <cambios>? <espacios>? <sentencias>
 
 <sentencia> ::= (<creacion> 
                 | <asignacion> 
                 | <obtenerAsignarElementoArreglo> 
                 | <condicional> 
+                | <bucle>
+                | <bloqueFor>
                 | "break" 
                 | <retorno>
-                | <comentario>
                 ) <finalExpresion>
 
 <expresion> ::= <termino> ( <espacios>? ("+" | "-") <espacios>? <termino> )*
@@ -116,6 +115,7 @@
               | <palabraReservadaTrue>
               | <palabraReservadaFalse>
               | <definicionChar>
+              | <identificadorFuncion>
               | <cadena>
               | <identificador>
               | <palabraReservadaLet> <espacios> <tipo> <abreCorchete> <definicionNatural> <cierraCorchete> <espacios> <identificador> <finalExpresion>
@@ -127,10 +127,10 @@
 
 <asignacion> ::= <identificador> <espacios>? <simboloIgual> <espacios>? <expresion>
 
-<condicional> ::= "decide of" <cambios>?
+<condicional> ::= "decide of" <espacios>? <cambios>?
                   (<espacios>? <abrirParentesis> <espacios>? <expresionRelacional> <espacios>? <cerrarParentesis> <espacios>? "->" <espacios>? <cambios>? <espacios>? <bloque> <espacios>? <cambios>?)+
                   (<espacios>? "else" <espacios>? "->" <espacios>? <bloque> <cambios>?)?
-                  "end decide"
+                  <espacios>? "end decide"
 
 <operadorRelacional> ::= "<" | "<=" | ">" | ">=" | "==" | "!="
 
@@ -152,10 +152,17 @@
 
 <bloque> ::= <abrirBloque> <cambios>? <espacios>? <cambios>? <listaSentencias> <cambios>? <espacios>? <cambios>? <cerrarBloque>
 
-<bloqueFor> ::= "for" <espacio>? <abrirParentesis>? <espacios>? <asignacion> <espacios>? <cerrarParentesis>? <espacio>?
-                "step" <espacio>? <definicionNatural> <espacio>? ( "to" | "downto" ) <espacio>?
-                <expresion> <espacio>? "do" (<espacio> <cambios>)* <bloque>
+<bloqueFor> ::= "for" <espacios>? <abrirParentesis>? <espacios>? <asignacion> <espacios>? <cerrarParentesis>? <espacios>?
+                "step" <espacios>? <definicionNatural> <espacios>? ( "to" | "downto" ) <espacios>?
+                <expresion> <espacios>? "do" <espacios>? <cambios>? <bloque>
 
-<funcion> ::= (<tipo> | "void") <espacios> <identificador> <espacios>?
-              <abrirParentesis> <espacios>? <listaParametros> <espacios>? <cerrarParentesis> <espacios>? <cambioLinea>?
+<identificadorFuncion> ::= <identificador> <espacios>? <abrirParentesis> <espacios>? <listaParametros> <espacios>? <cerrarParentesis>
+
+<funcion> ::= (<tipo> | "void") <espacios> <identificadorFuncion> <espacios>? <cambioLinea>?
               <bloque>
+
+<listaFunciones> ::= <funcion> | <funcion> <espacios>? <cambios>? <listaFunciones> | E
+
+<main> ::= "void" <espacios>? "main" <abrirParentesis> <cerrarParentesis> <espacios>? <finalExpresion>? <cambios>? <bloque>
+
+<program> ::= <listaFunciones> <main> <listaFunciones> 
