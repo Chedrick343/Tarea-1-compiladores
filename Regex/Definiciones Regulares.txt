@@ -14,9 +14,11 @@
 <letra> ::= [a-z] | [A-Z]
 <oracion> ::= <letra>+
 <simboloGuionBajo> ::= "_"
-<identificador> ::= <simboloGuionBajo>? (<oracion> | <digitoCero> | <simboloGuionBajo>)*
+<identificador> ::= <simboloGuionBajo>? (<oracion> | <digitoCero> | <simboloGuionBajo>)+
 <espacio> ::= " " | "\t"
 <espacios> ::= <espacio> | <espacio> <espacios>
+<cambioLinea> ::= "\n"
+<cambios> ::= <cambioLinea> | <cambioLinea> <cambios>
 
 <comilla> ::= "\""
 <cadena> ::= <comilla> (<oracion> | <digitoCero> | <simboloGuionBajo> | <punto> | <simboloMenos> | <espacios>)* <comilla>
@@ -71,7 +73,7 @@
 
 <parametros> ::= <parametro> | (<parametro> <espacios>? "," <espacios>? <parametros>)
 
-<parametro> ::= <tipo> <identificador>
+<parametro> ::= <declaracion>
 
 <listaParametros> ::= <parametros> | E
 
@@ -80,7 +82,7 @@
 
 <listaSentencias> ::= <sentencias> | E
 
-<sentencias> ::= <sentencia> | <sentencia> <sentencias>
+<sentencias> ::= <sentencia> | <sentencia> <cambios>? <espacios>? <sentencias>
 
 <operacion> ::= <expresion> ("+" | "-" | "*" | "/") <expresion>
 
@@ -94,15 +96,17 @@
               | <operacion>
               | <palabraReservadaLet> <espacios> <tipo> <abreCorchete> <definicionNatural> <cierraCorchete> <espacios> <identificador> <finalExpresion>
 
-<creacion> ::= <palabraReservadaLet> <espacios> <tipo> <espacios> <identificador>
-               (<espacios>? <simboloIgual> <espacios>? <expresion>)? <finalExpresion>
+<declaracion> ::= <tipo> <espacios> <identificador>
 
-<asignacion> ::= <identificador> <espacios>? <simboloIgual> <espacios>? <expresion> <finalExpresion>
+<creacion> ::= <palabraReservadaLet> <espacios> <declaracion>
+               (<espacios>? <simboloIgual> <espacios>? <expresion>)?
 
-<sentencia> ::= <creacion> | <asignacion>
+<asignacion> ::= <identificador> <espacios>? <simboloIgual> <espacios>? <expresion>
 
-<bloque> ::= <abrirBloque> <listaSentencias> <cerrarBloque>
+<sentencia> ::= (<creacion> | <asignacion>) <finalExpresion>
 
-<funcion> ::= (<tipo> | "void") <espacios> <identificador> 
-              <abrirParentesis> <espacios>? <listaParametros> <espacios>? <cerrarParentesis> 
+<bloque> ::= <abrirBloque> <cambios>? <espacios>? <cambios>? <listaSentencias> <cambios>? <espacios>? <cambios>? <cerrarBloque>
+
+<funcion> ::= (<tipo> | "void") <espacios> <identificador> <espacios>?
+              <abrirParentesis> <espacios>? <listaParametros> <espacios>? <cerrarParentesis> <espacios>? <cambioLinea>?
               <bloque>
