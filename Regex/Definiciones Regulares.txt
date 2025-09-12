@@ -103,6 +103,8 @@
                 | <restaUnaria>
                 | "break" 
                 | <retorno>
+                | <leerEntrada>
+                | <imprimirElementos>
                 | <comentario>
                 ) <finalExpresion>
 
@@ -162,6 +164,13 @@
 <simboloSuma> ::= "+"
 <sumaUnaria> ::= <identificador> <simboloSuma> <simboloSuma>
 <restaUnaria> ::= <identificador> <simboloMenos> <simboloMenos>
+<palabraReservadaInput> ::= "input"
+<palabraReservadaOutput> ::= "output"
+
+<leerEntrada> ::= <palabraReservadaInput> <espacios> <identificador>
+<imprimirElementos> ::= <palabraReservadaOutput> <abreParentesis> (<cadena> | <definicionEntero> | <definicionFlotante> | <palabraReservadaTrue> | <palabraReservadaFalse> | <identificador> | <definicionChar>) 
+
+
 
 <funcion> ::= (<tipo> | "void") <espacios> <identificador> <espacios>?
               <abrirParentesis> <espacios>? <listaParametros> <espacios>? <cerrarParentesis> <espacios>? <cambioLinea>?
