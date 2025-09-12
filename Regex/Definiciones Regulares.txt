@@ -58,3 +58,50 @@
 <cierraCorchete> ::= "]"
 <declaracionArregloEntero> ::= <palabraReservadaLet> <espacio> <palabraReservadaTipoEntero> <abreCorchete> <definicionNatural> <cierraCorchete> <espacio> <identificador> <finalExpresion>
 <declaracionArregloChar> ::= <palabraReservadaLet> <espacio> <palabraReservadaTipoChar> <abreCorchete> <definicionNatural> <cierraCorchete> <espacio> <identificador> <finalExpresion>
+
+
+
+<tipo> ::= <palabraReservadaTipoBooleano>   | <palabraReservadaTipoChar> 
+            | <palabraReservadaTipoEntero>  | <palabraReservadaTipoFlotante> 
+            | <palabraReservadaTipoString>
+
+<abrirParentesis> ::= "("
+<cerrarParentesis> ::= ")"
+
+<parametros> ::= <parametro> | <parametro> <parametros> 
+
+<parametro> ::= <tipo> <identificador>
+
+<listaParametros> ::= <parametros> | E
+
+<abrirBloque> ::= "("
+<cerrarBloque> ::= ")"
+
+<listaSentencias> ::= <sentencias> | E
+
+<sentencias> ::= <sentencia> | <sentencia> <sentencias>
+
+<operacion> ::= <expresion> ("+" | "-" | "*" | "/") <expresion>
+
+<expresion> ::= <definicionEntero>
+              | <definicionFlotante>
+              | <palabraReservadaTrue>
+              | <palabraReservadaFalse>
+              | <comillaSimple> (<letra> | <expresionesASCII> | <digitoCero>) <comillaSimple>
+              | <cadena>
+              | <identificador>
+              | <operacion>
+              | <palabraReservadaLet> <espacio> <tipo> <abreCorchete> <definicionNatural> <cierraCorchete> <espacio> <identificador> <finalExpresion>
+
+<creacion> ::= <palabraReservadaLet> <espacio> <tipo> <espacio> <identificador>
+               (<espacio>? <simboloIgual> <espacio>? <expresion>)? <finalExpresion>
+
+<asignacion> ::= <identificador> <espacio>? <simboloIgual> <espacio>? <expresion> <finalExpresion>
+
+<sentencia> ::= <creacion> | <asignacion>
+
+<bloque> ::= <abrirBloque> <sentencias> <cerrarBloque>
+
+<funcion> ::= (<tipo> | "void") <espacio> <identificador> 
+              <abrirParentesis> <listaParametros> <cerrarParentesis> 
+              <bloque>
