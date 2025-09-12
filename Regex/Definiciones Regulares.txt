@@ -14,7 +14,7 @@
 <letra> ::= [a-z] | [A-Z]
 <oracion> ::= <letra>+
 <simboloGuionBajo> ::= "_"
-<identificador> ::= <simboloGuionBajo>? (<oracion> | <digitoCero> | <simboloGuionBajo>)*
+<identificador> ::= <simboloGuionBajo>? (<oracion> | <digitoCero> | <simboloGuionBajo>)+
 <espacio> ::= " " | "\t"
 <espacios> ::= <espacio> | <espacio> <espacios>
 
@@ -54,12 +54,14 @@
 <declaracionBooleano> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoBooleano> <espacios> <identificador> (<espacios>? <simboloIgual> <espacios>? (<palabraReservadaTrue> | <palabraReservadaFalse>))? <finalExpresion>
 <declaracionCaracter> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoChar> <espacios> <identificador> (<espacios>? <simboloIgual> <espacios>? <comillaSimple> (<letra> | <expresionesASCII> | <digitoCero>) <comillaSimple>)? <finalExpresion>
 <declaracionString> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoString> <espacios> <identificador> (<espacios>? <simboloIgual> <espacios>? <definicionString>)? <finalExpresion>  
+<definicionChar> ::= <comillaSimple> (<letra> | <expresionesASCII> | <digitoCero>) <comillaSimple>
 
 <abreCorchete> ::= "["
 <cierraCorchete> ::= "]"
 <declaracionArregloEntero> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoEntero> <abreCorchete> <definicionNatural> <cierraCorchete> <espacios> <identificador> <finalExpresion>
 <declaracionArregloChar> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoChar> <abreCorchete> <definicionNatural> <cierraCorchete> <espacios> <identificador> <finalExpresion>
-
+<asignacionArreglo> ::= <espacios>? <simboloIgual> <espacios>? (<definicionChar> | <definicionEntero> | <identificador>)
+<obtenerAsignarElementoArreglo> ::= <identificador> <abreCorchete> <definicionNatural> <cierraCorchete> (<asignacionArreglo>)? <espacios>?
 
 
 <tipo> ::= <palabraReservadaTipoBooleano>   | <palabraReservadaTipoChar> 
