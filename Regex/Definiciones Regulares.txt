@@ -121,7 +121,7 @@
               | <cadena>
               | <sumaUnaria>
               | <identificador>
-              | <palabraReservadaLet> <espacios> <tipo> <abreCorchete> <definicionNatural> <cierraCorchete> <espacios> <identificador> <finalExpresion>
+              | <obtenerAsignarElementoArreglo>
 
 <declaracion> ::= <tipo> <espacios> <identificador>
 
