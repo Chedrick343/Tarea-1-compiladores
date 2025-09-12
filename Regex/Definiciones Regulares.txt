@@ -48,11 +48,12 @@
                      | "{" | "|" | "}" | "~"
  
 <comillaSimple> ::= "'"
+<definicionString> ::= <comilla> (<letra> | <expresionesASCII> | <digitoCero>)* <comilla>
 <declaracionEntero> ::= <palabraReservadaLet> <espacio> <palabraReservadaTipoEntero> <espacio> <identificador> (<espacio>? <simboloIgual> <espacio>? <definicionEntero>)? <finalExpresion>
 <declaracionFlotante> ::= <palabraReservadaLet> <espacio> <palabraReservadaTipoFlotante> <espacio> <identificador> (<espacio>? <simboloIgual> <espacio>? <definicionFlotante>)? <finalExpresion>
 <declaracionBooleano> ::= <palabraReservadaLet> <espacio> <palabraReservadaTipoBooleano> <espacio> <identificador> (<espacio>? <simboloIgual> <espacio>? (<palabraReservadaTrue> | <palabraReservadaFalse>))? <finalExpresion>
 <declaracionCaracter> ::= <palabraReservadaLet> <espacio> <palabraReservadaTipoChar> <espacio> <identificador> (<espacio>? <simboloIgual> <espacio>? <comillaSimple> (<letra> | <expresionesASCII> | <digitoCero>) <comillaSimple>)? <finalExpresion>
-<declaracionString> ::= <palabraReservadaLet> <espacio> <palabraReservadaTipoString> <espacio> <identificador> (<espacio>? <simboloIgual> <espacio>? <comilla> (<letra> | <expresionesASCII> | <digitoCero>)* <comilla>)? <finalExpresion>  
+<declaracionString> ::= <palabraReservadaLet> <espacio> <palabraReservadaTipoString> <espacio> <identificador> (<espacio>? <simboloIgual> <espacio>? <definicionString>)? <finalExpresion>  
 
 <abreCorchete> ::= "["
 <cierraCorchete> ::= "]"
