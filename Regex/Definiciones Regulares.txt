@@ -10,6 +10,13 @@
 <punto> ::= "."
 <definicionFlotante> ::= <definicionEntero> <punto> <definicionNatural> | <cero> <punto> <cero> | <simboloMenos>? <cero> <punto> <cero>* <definicionNatural>+ | <definicionEntero> <punto> <cero>* <definicionNatural>
 
+<comentario> ::= <comentarioUnaLinea> | <comentarioMultiLinea>
+
+<comentarioUnaLinea> ::= "|" (<letra> | <digitoCero> | <expresionesASCII> | <espacios>)* <cambioLinea>?
+
+<comentarioMultiLinea> ::= "adm" (<letra> | <digitoCero> | <expresionesASCII> | <espacios> | <cambioLinea>)* "!"
+
+
 
 <letra> ::= [a-z] | [A-Z]
 <oracion> ::= <letra>+
@@ -82,22 +89,37 @@
 <abrirBloque> ::= "("
 <cerrarBloque> ::= ")"
 
+<retorno> ::= "return" <espacios>? <expresion>?
+
 <listaSentencias> ::= <sentencias> | E
 
-<sentencias> ::= <sentencia> | <sentencia> <cambios>? <espacios>? <sentencias>
+<sentencias> ::= <sentencia> | <sentencia> <espacios>? <cambios>? <espacios>? <sentencias>
 
-<sentencia> ::= (<creacion> | <asignacion> | <obtenerAsignarElementoArreglo>) <finalExpresion>
+<sentencia> ::= (<creacion> 
+                | <asignacion> 
+                | <obtenerAsignarElementoArreglo> 
+                | <condicional> 
+                | "break" 
+                | <retorno>
+                | <comentario>
+                ) <finalExpresion>
 
-<operacion> ::= <expresion> <espacios>? ("+" | "-" | "*" | "/") <espacios>? <expresion>
+<operacion> ::= <termino> ( <espacios>? ("+" | "-") <espacios>? <termino> )*
+
+<termino>   ::= <factor> ( <espacios>? ("*" | "/" | "//") <espacios>? <factor> )*
+
+<factor>    ::= <expresion>
+              | <abrirParentesis> <operacion> <cerrarParentesis>
 
 <expresion> ::= <definicionEntero>
               | <definicionFlotante>
               | <palabraReservadaTrue>
               | <palabraReservadaFalse>
-              | <comillaSimple> (<letra> | <expresionesASCII> | <digitoCero>) <comillaSimple>
+              | <definicionChar>
               | <cadena>
               | <identificador>
               | <operacion>
+              | <expresionRelacional>
               | <palabraReservadaLet> <espacios> <tipo> <abreCorchete> <definicionNatural> <cierraCorchete> <espacios> <identificador> <finalExpresion>
 
 <declaracion> ::= <tipo> <espacios> <identificador>
@@ -107,7 +129,28 @@
 
 <asignacion> ::= <identificador> <espacios>? <simboloIgual> <espacios>? <expresion>
 
+<condicional> ::= "decide of" <cambios>?
+                  (<espacios>? <abrirParentesis> <espacios>? <expresionRelacional> <espacios>? <cerrarParentesis> <espacios>? "->" <espacios>? <cambios>? <espacios>? <bloque> <espacios>? <cambios>?)+
+                  (<espacios>? "else" <espacios>? "->" <espacios>? <bloque> <cambios>?)?
+                  "end decide"
 
+<operadorRelacional> ::= "<" | "<=" | ">" | ">=" | "==" | "!="
+
+<expresionRelacional> ::= <expresionNumerica> <espacios>? <operadorRelacional> <espacios>? <expresionNumerica>
+                        | <expresionBooleana> <espacios>? ("==" | "!=") <espacios>? <expresionBooleana>
+
+<expresionNumerica> ::= <definicionEntero>
+                      | <definicionFlotante>
+                      | <identificador>
+                      | <operacion>
+
+<expresionBooleana> ::= <palabraReservadaTrue>
+                      | <palabraReservadaFalse>
+                      | <identificador>
+
+<bucle> ::= "loop" <espacios>? <cambios>? <espacios>? <sentencias> <espacios>? <cambios>? <espacios>?
+            "exit when" <espacios>? <abrirParentesis>? <espacios>? <expresionRelacional> <espacios>? <cerrarParentesis>? <finalExpresion> <espacios>? <cambios>? 
+            "end loop"
 
 <bloque> ::= <abrirBloque> <cambios>? <espacios>? <cambios>? <listaSentencias> <cambios>? <espacios>? <cambios>? <cerrarBloque>
 
