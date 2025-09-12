@@ -57,7 +57,6 @@
 <declaracionBooleano> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoBooleano> <espacios> <identificador> (<espacios>? <simboloIgual> <espacios>? (<palabraReservadaTrue> | <palabraReservadaFalse>))? <finalExpresion>
 <declaracionCaracter> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoChar> <espacios> <identificador> (<espacios>? <simboloIgual> <espacios>? <comillaSimple> (<letra> | <expresionesASCII> | <digitoCero>) <comillaSimple>)? <finalExpresion>
 <declaracionString> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoString> <espacios> <identificador> (<espacios>? <simboloIgual> <espacios>? <definicionString>)? <finalExpresion>  
-<definicionChar> ::= <comillaSimple> (<letra> | <expresionesASCII> | <digitoCero>) <comillaSimple>
 
 <abreCorchete> ::= "["
 <cierraCorchete> ::= "]"
@@ -88,17 +87,20 @@
 <sentencias> ::= <sentencia> | <sentencia> <cambios>? <espacios>? <sentencias>
 
 <sentencia> ::= (<creacion> | <asignacion> | <obtenerAsignarElementoArreglo>) <finalExpresion>
+<operacion> ::= <termino> ( <espacios>? ("+" | "-") <espacios>? <termino> )*
 
-<operacion> ::= <expresion> <espacios>? ("+" | "-" | "*" | "/") <espacios>? <expresion>
+<termino>   ::= <factor> ( <espacios>? ("*" | "/" | "//") <espacios>? <factor> )*
+
+<factor>    ::= <expresion>
+              | <abrirParentesis> <operacion> <cerrarParentesis>
 
 <expresion> ::= <definicionEntero>
               | <definicionFlotante>
               | <palabraReservadaTrue>
               | <palabraReservadaFalse>
-              | <comillaSimple> (<letra> | <expresionesASCII> | <digitoCero>) <comillaSimple>
+              | <definicionChar>
               | <cadena>
               | <identificador>
-              | <operacion>
               | <palabraReservadaLet> <espacios> <tipo> <abreCorchete> <definicionNatural> <cierraCorchete> <espacios> <identificador> <finalExpresion>
 
 <declaracion> ::= <tipo> <espacios> <identificador>
