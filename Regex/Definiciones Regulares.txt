@@ -57,11 +57,11 @@
  
 <comillaSimple> ::= "'"
 <definicionString> ::= <comilla> (<letra> | <expresionesASCII> | <digitoCero>)* <comilla>
-<declaracionEntero> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoEntero> <espacios> <identificador> (<espacios>? <simboloIgual> <espacios>? <definicionEntero>)? <finalExpresion>
-<declaracionFlotante> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoFlotante> <espacios> <identificador> (<espacios>? <simboloIgual> <espacios>? <definicionFlotante>)? <finalExpresion>
-<declaracionBooleano> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoBooleano> <espacios> <identificador> (<espacios>? <simboloIgual> <espacios>? (<palabraReservadaTrue> | <palabraReservadaFalse>))? <finalExpresion>
-<declaracionCaracter> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoChar> <espacios> <identificador> (<espacios>? <simboloIgual> <espacios>? <comillaSimple> (<letra> | <expresionesASCII> | <digitoCero>) <comillaSimple>)? <finalExpresion>
-<declaracionString> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoString> <espacios> <identificador> (<espacios>? <simboloIgual> <espacios>? <definicionString>)? <finalExpresion>  
+<declaracionEntero> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoEntero> <espacios> <identificador> (<espacios>? <simboloIgual> <espacios>? (<definicionEntero> | <identificador>))? 
+<declaracionFlotante> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoFlotante> <espacios> <identificador> (<espacios>? <simboloIgual> <espacios>? (<definicionFlotante> | <identificador>))? 
+<declaracionBooleano> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoBooleano> <espacios> <identificador> (<espacios>? <simboloIgual> <espacios>? (<palabraReservadaTrue> | <palabraReservadaFalse> | <identificador>))?
+<declaracionCaracter> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoChar> <espacios> <identificador> (<espacios>? <simboloIgual> <espacios>? (<comillaSimple> (<letra> | <expresionesASCII> | <digitoCero>) <comillaSimple>) | <identificador>)? 
+<declaracionString> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoString> <espacios> <identificador> (<espacios>? <simboloIgual> <espacios>? (<definicionString>) | <identificador>)?
 
 <abreCorchete> ::= "["
 <cierraCorchete> ::= "]"
@@ -90,12 +90,20 @@
 <retorno> ::= "return" <espacios>? <expresion>?
 
 <listaSentencias> ::= <sentencias> | E
-
+<asignacionEntreIdentificadores> ::= <identificador> <espacios>? <simboloIgual> <espacios>? <identificador>
 <sentencias> ::= (<sentencia> | <comentario>) | (<sentencia> | <comentario>) <espacios>? <cambios>? <espacios>? <sentencias>
 
-<sentencia> ::= (<creacion> 
-                | <asignacion> 
-                | <obtenerAsignarElementoArreglo> 
+<sentencia> ::= (
+                  <declaracionEntero>
+				| <declaracionFlotante>
+				| <declaracionBooleano>
+				| <declaracionCaracter>
+                | <declaracionString>
+                | <declaracionArregloEntero>
+                | <declaracionArregloChar>
+                | <asignacionArreglo>
+                | <obtenerAsignarElementoArreglo>
+                | <asignacionEntreIdentificadores>
                 | <condicional> 
                 | <sumaUnaria>
                 | <restaUnaria>
