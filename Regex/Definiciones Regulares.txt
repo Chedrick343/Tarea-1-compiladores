@@ -14,7 +14,7 @@
 
 <comentarioUnaLinea> ::= "|" (<letra> | <digitoCero> | <expresionesASCII> | <espacios>)* <cambioLinea>?
 
-<comentarioMultiLinea> ::= "adm" (<letra> | <digitoCero> | <expresionesASCII> | <espacios> | <cambioLinea>)* "!"
+<comentarioMultiLinea> ::= "¡" (<letra> | <digitoCero> | <expresionesASCII> | <espacios> | <cambioLinea>)* "!"
 
 <letra> ::= [a-z] | [A-Z]
 <oracion> ::= <letra>+
@@ -63,8 +63,8 @@
 <declaracionCaracter> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoChar> <espacios> <identificador> (<espacios>? <simboloIgual> <espacios>? (<comillaSimple> (<letra> | <expresionesASCII> | <digitoCero>) <comillaSimple>) | <identificador>)? 
 <declaracionString> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoString> <espacios> <identificador> (<espacios>? <simboloIgual> <espacios>? (<definicionString>) | <identificador>)?
 
-<abreCorchete> ::= "["
-<cierraCorchete> ::= "]"
+<abreCorchete> ::= "¿"
+<cierraCorchete> ::= "?"
 <declaracionArregloEntero> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoEntero> <abreCorchete> <definicionNatural> <cierraCorchete> <espacios> <identificador> <finalExpresion>
 <declaracionArregloChar> ::= <palabraReservadaLet> <espacios> <palabraReservadaTipoChar> <abreCorchete> <definicionNatural> <cierraCorchete> <espacios> <identificador> <finalExpresion>
 <asignacionArreglo> ::= <espacios>? <simboloIgual> <espacios>? (<definicionChar> | <definicionEntero> | <identificador>)
@@ -75,8 +75,8 @@
             | <palabraReservadaTipoEntero>  | <palabraReservadaTipoFlotante> 
             | <palabraReservadaTipoString>
 
-<abrirParentesis> ::= "("
-<cerrarParentesis> ::= ")"
+<abrirParentesis> ::= "є"
+<cerrarParentesis> ::= "э"
 
 <parametros> ::= <parametro> | (<parametro> <espacios>? "," <espacios>? <parametros>)
 
@@ -84,8 +84,8 @@
 
 <listaParametros> ::= <parametros> | E
 
-<abrirBloque> ::= "("
-<cerrarBloque> ::= ")"
+<abrirBloque> ::= "¿"
+<cerrarBloque> ::= "?"
 
 <retorno> ::= "return" <espacios>? <expresion>?
 
@@ -167,6 +167,27 @@
 <expresionBooleana> ::= <palabraReservadaTrue>
                       | <palabraReservadaFalse>
                       | <identificador>
+                      | <identificadorFuncion>
+                      | <disyuncion>
+
+<simboloConjuncion> ::= "@"
+<simboloDisyuncion>  ::= "~"
+<simboloNegacion>    ::= <comillaSimple> "Σ" <comillaSimple>
+
+<disyuncion> ::= <conjuncion> ( <espacios>? <simboloDisyuncion> <espacios>? <conjuncion> )*
+
+<conjuncion> ::= <negacion> ( <espacios>? <simboloConjuncion> <espacios>? <negacion> )*
+
+<negacion> ::= <simboloNegacion> <espacios>? <negacion>
+             | <primariaBool>
+
+<primariaBool> ::= <palabraReservadaTrue>
+                 | <palabraReservadaFalse>
+                 | <identificador>
+                 | <identificadorFuncion>
+                 | <abrirParentesis> <espacios>? <expresionBooleana> <espacios>? <cerrarParentesis>
+                 | <expresionRelacional>
+
 
 <bucle> ::= "loop" <espacios>? <cambios>? <espacios>? <sentencias> <espacios>? <cambios>? <espacios>?
             "exit when" <espacios>? <abrirParentesis>? <espacios>? <expresionRelacional> <espacios>? <cerrarParentesis>? <finalExpresion> <espacios>? <cambios>? 
