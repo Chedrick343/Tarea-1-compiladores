@@ -93,8 +93,16 @@
 <asignacionEntreIdentificadores> ::= <identificador> <espacios>? <simboloIgual> <espacios>? <identificador>
 <sentencias> ::= (<sentencia> | <comentario>) | (<sentencia> | <comentario>) <espacios>? <cambios>? <espacios>? <sentencias>
 
+<definiciones> ::= <definicionEntero>
+                  | <definicionFlotante>
+                  | <palabraReservadaTrue>
+                  | <palabraReservadaFalse>
+                  | <definicionChar>
+                  | <definicionString>
+<asignacionDefinicion> ::= <identificador> <espacios>? <simboloIgual> <espacios>? <definiciones>
 <sentencia> ::= (
                   <declaracionEntero>
+                | <asignacionDefinicion>
 				| <declaracionFlotante>
 				| <declaracionBooleano>
 				| <declaracionCaracter>
